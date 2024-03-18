@@ -3,6 +3,9 @@ package com.example.youngJPA.member.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -17,15 +20,26 @@ import lombok.*;
                         allocationSize = 1
                   )
 public class Member {
-//    JPA 테이블 컬럼 생성
+
+    //    JPA 테이블 컬럼 생성
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "MEMBER_ID_GEN")
-    @Column(name = "MEMBER_ID")
+    @Column(name = "MEMBER_ID", length = 20, unique = true)
     private Long memberId;
 
-    @Column(name = "ID")
+    @Column(name = "ID",length = 200,nullable = false)
     private String id;
 
-    @Column(name = "PW")
+    @Column(name = "PW",length = 200,nullable = false)
     private String pw;
+
+    @Column(name = "ABOUT_ME",length = 3000,updatable = false)
+    private String aboutMe;
+
+    @Column(name = "MEMBER_DT",updatable = false,nullable = false)
+    private LocalDate memberDt;
+
+    @Column(name = "MEMBER_AUTH",updatable = false)
+    @Enumerated(EnumType.STRING)
+    private Auth memberAuth;
 }

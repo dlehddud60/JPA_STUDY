@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -24,7 +25,7 @@ public class MemberServiceImpl implements MemberService {
         log.info("================start================");
         em.persist(member);
         member.setId("1234");
-        em.flush();
+        member.setAboutMe("가입인사는 딱 한번밖에 안되지만 변경을 해보려고 합니다.");
         log.info("================persist1================");
         em.persist(member);
         member.setId("12345");

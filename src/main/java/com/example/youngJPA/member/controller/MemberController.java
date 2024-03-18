@@ -1,5 +1,6 @@
 package com.example.youngJPA.member.controller;
 
+import com.example.youngJPA.member.entity.Auth;
 import com.example.youngJPA.member.entity.Member;
 import com.example.youngJPA.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -23,6 +25,9 @@ public class MemberController {
         Member member = Member.builder()
                 .id("LeeDongYoung")
                 .pw("ehddud12")
+                .aboutMe("안녕하세요 저는 이동영 입니다. 이번에 XX사이트를 지인을 통해 가입하게 되었습니다. 앞으로도 사이트 활동을 자주 하려고 합니다. 감사합니다.")
+                .memberAuth(Auth.USER)
+                .memberDt(LocalDate.now())
                 .build();
         memberService.save(member);
 
