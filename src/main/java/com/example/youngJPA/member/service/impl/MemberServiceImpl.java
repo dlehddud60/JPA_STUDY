@@ -31,6 +31,7 @@ public class MemberServiceImpl implements MemberService {
         log.info("===============1111================");
         log.info("================end 쓰기지연에서 flush작업================");
         System.out.println();
+        memberRepository.save(member);
     }
 
     @Override
