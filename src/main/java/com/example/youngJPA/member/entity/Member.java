@@ -14,11 +14,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @SequenceGenerator(
-                        name = "MEMBER_ID_GEN",
-                        sequenceName = "MEMBER_ID",
-                        initialValue = 1000000,
-                        allocationSize = 1
-                  )
+        name = "MEMBER_ID_GEN",
+        sequenceName = "MEMBER_ID",
+        initialValue = 1000000,
+        allocationSize = 1
+)
 public class Member {
 
     //    JPA 테이블 컬럼 생성

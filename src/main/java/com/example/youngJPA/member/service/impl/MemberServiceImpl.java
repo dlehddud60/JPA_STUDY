@@ -24,14 +24,11 @@ public class MemberServiceImpl implements MemberService {
         System.out.println();
         log.info("================start================");
         em.persist(member);
-        member.setId("1234");
-        member.setAboutMe("가입인사는 딱 한번밖에 안되지만 변경을 해보려고 합니다.");
-        log.info("================persist1================");
-        em.persist(member);
-        member.setId("12345");
-        log.info("================persist2================");
-        em.persist(member);
-        log.info("================persist3================");
+        em.detach(member); // 준영속 상태
+        em.close(); // 영속성 컨텍스트 종료.
+        em.clear(); // 영속성 컨텍스트 초기화.
+        em.merge(member);
+        log.info("===============1111================");
         log.info("================end 쓰기지연에서 flush작업================");
         System.out.println();
     }
