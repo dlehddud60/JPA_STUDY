@@ -40,7 +40,11 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public Board findByBoardId(Long boardSeq) {
         log.info("1차 캐쉬에서 board 엔티티 조회");
-        em.find(Board.class,boardSeq);
+        Board board1 = em.find(Board.class,boardSeq);
+        Board board2 = em.find(Board.class,boardSeq);
+        log.info("================boardEntity1================={}",board1);
+        log.info("================boardEntity2================={}",board2);
+        log.info("==================entity동일성 비교=========================={}",board1 == board2);
       return  boardRepository.findById(boardSeq).get();
     }
 

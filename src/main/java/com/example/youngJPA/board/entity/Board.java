@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 
+@ToString
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
