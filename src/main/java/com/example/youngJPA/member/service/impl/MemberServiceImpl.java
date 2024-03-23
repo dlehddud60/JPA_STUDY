@@ -22,21 +22,20 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void save(Member member) {
         System.out.println();
+        em.persist(member.getLocker());
+        em.persist(member.getTeam());
+        member.getTeam().setName("개발1팀");
+        member.getLocker().setName("개인로커");
         log.info("================start================");
         em.persist(member);
-        em.detach(member); // 준영속 상태
-        em.close(); // 영속성 컨텍스트 종료.
-        em.clear(); // 영속성 컨텍스트 초기화.
-        em.merge(member);
-        log.info("===============1111================");
-        log.info("================end 쓰기지연에서 flush작업================");
-        System.out.println();
-        memberRepository.save(member);
     }
 
     @Override
     public Member findByMemberId(Long memberId) {
-        return memberRepository.findById(memberId).get();
+
+        Member member = em.find(Member.class, memberId);
+
+        return member;
     }
 
     @Override

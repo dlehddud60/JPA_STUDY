@@ -42,4 +42,14 @@ public class Member {
     @Column(name = "MEMBER_AUTH",updatable = false)
     @Enumerated(EnumType.STRING)
     private Auth memberAuth;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "LOCKER_ID")
+    private Locker locker;
+
+
 }
