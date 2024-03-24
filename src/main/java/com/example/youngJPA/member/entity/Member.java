@@ -1,22 +1,21 @@
 package com.example.youngJPA.member.entity;
 
+//import com.example.youngJPA.locker.domain.Locker;
+import com.example.youngJPA.team.domain.Team;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
 @Builder
+@ToString
 @Table(name = "MEMBER")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @SequenceGenerator(
         name = "MEMBER_ID_GEN",
         sequenceName = "MEMBER_ID",
-        initialValue = 1000000,
         allocationSize = 1
 )
 public class Member {
@@ -33,23 +32,13 @@ public class Member {
     @Column(name = "PW",length = 200,nullable = false)
     private String pw;
 
-    @Column(name = "ABOUT_ME",length = 3000,updatable = false)
-    private String aboutMe;
-
-    @Column(name = "MEMBER_DT",updatable = false,nullable = false)
-    private LocalDate memberDt;
-
-    @Column(name = "MEMBER_AUTH",updatable = false)
-    @Enumerated(EnumType.STRING)
-    private Auth memberAuth;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "TEAM_ID")
     private Team team;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "LOCKER_ID")
-    private Locker locker;
+//    @OneToOne
+//    @JoinColumn(name = "LOCKER_ID")
+//    private Locker locker;
 
 
 }

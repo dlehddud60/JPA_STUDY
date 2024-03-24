@@ -1,5 +1,6 @@
-package com.example.youngJPA.member.entity;
+package com.example.youngJPA.team.domain;
 
+import com.example.youngJPA.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,7 +16,8 @@ import java.util.List;
 @Table(name = "TEAM")
 @SequenceGenerator(
                         name = "TEAM_ID_GEN",
-                        sequenceName = "TEAM_ID"
+                        sequenceName = "TEAM_ID",
+                        allocationSize = 1
                     )
 public class Team {
     @Column(name = "TEAM_ID")
