@@ -33,11 +33,11 @@ public class Member {
     @Column(name = "PW",length = 200,nullable = false)
     private String pw;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_ID")
     private Team team;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "LOCKER_ID")
     private Locker locker;
 
