@@ -1,14 +1,15 @@
 package com.example.youngJPA.member.service;
 
 import com.example.youngJPA.member.entity.Member;
+import com.example.youngJPA.member.model.FindResponseMemberModel;
 
 import java.util.List;
 
 public interface MemberService {
 
-    void save(Member member);
+    void save();
 
-    Member findByMemberId(Long memberId);
+    FindResponseMemberModel findByMemberId(Long memberId);
 
     List<Member> findAll();
 

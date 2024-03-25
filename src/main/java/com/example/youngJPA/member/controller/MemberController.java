@@ -2,6 +2,7 @@ package com.example.youngJPA.member.controller;
 
 import com.example.youngJPA.member.entity.Auth;
 import com.example.youngJPA.member.entity.Member;
+import com.example.youngJPA.member.model.FindResponseMemberModel;
 import com.example.youngJPA.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -22,16 +23,11 @@ public class MemberController {
 
     @GetMapping("/save")
     public void save() {
-        Member member = Member.builder()
-                .id("LeeDongYoung")
-                .pw("ehddud12")
-                .build();
-        memberService.save(member);
-
+        memberService.save();
     }
 
    @GetMapping("/find/{memberId}")
-    public Member find(@PathVariable(name = "memberId") Long memberId) {
+    public FindResponseMemberModel find(@PathVariable(name = "memberId") Long memberId) {
         return memberService.findByMemberId(memberId);
    }
 

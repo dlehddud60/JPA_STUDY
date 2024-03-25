@@ -1,6 +1,7 @@
 package com.example.youngJPA.team.domain;
 
 import com.example.youngJPA.member.entity.Member;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,5 +30,5 @@ public class Team {
     private String name;
 
     @OneToMany(mappedBy = "team")
-    private List<Member> members = new ArrayList<>();
+    private final List<Member> members = new ArrayList<>();
 }

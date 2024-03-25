@@ -1,6 +1,7 @@
 package com.example.youngJPA.member.entity;
 
 //import com.example.youngJPA.locker.domain.Locker;
+import com.example.youngJPA.locker.domain.Locker;
 import com.example.youngJPA.team.domain.Team;
 import jakarta.persistence.*;
 import lombok.*;
@@ -36,9 +37,9 @@ public class Member {
     @JoinColumn(name = "TEAM_ID")
     private Team team;
 
-//    @OneToOne
-//    @JoinColumn(name = "LOCKER_ID")
-//    private Locker locker;
+    @OneToOne
+    @JoinColumn(name = "LOCKER_ID")
+    private Locker locker;
 
 
 }

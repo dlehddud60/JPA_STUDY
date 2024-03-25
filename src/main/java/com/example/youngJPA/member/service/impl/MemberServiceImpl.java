@@ -1,10 +1,14 @@
 package com.example.youngJPA.member.service.impl;
 
 //import com.example.youngJPA.locker.domain.Locker;
+import com.example.youngJPA.locker.domain.Locker;
+import com.example.youngJPA.locker.model.FindResponseLockerModel;
 import com.example.youngJPA.member.entity.Member;
+import com.example.youngJPA.member.model.FindResponseMemberModel;
 import com.example.youngJPA.team.domain.Team;
 import com.example.youngJPA.member.repository.MemberRepository;
 import com.example.youngJPA.member.service.MemberService;
+import com.example.youngJPA.team.model.FindResponseTeamModel;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -22,46 +26,40 @@ public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
     private final EntityManager em;
     @Override
-    public void save(Member member) {
-        log.info("============save start================");
-
-        //팀 저장
+    public void save() {
         Team team = Team.builder()
-                .name("개발1팀")
-                .members(new ArrayList<>())
+                .name("개발 1팀")
                 .build();
         em.persist(team);
-        log.info("==========team1==========={}",team);
-//
-//        //락커 저장
-//        Locker locker = Locker.builder()
-//                .name("이동영 개인 라커")
-//                .build();
-//        em.persist(locker);
 
-        //회원 저장
-        member.setTeam(team);
-        team.getMembers().add(member);
+        Locker locker = Locker.builder()
+                .name("개인라커")
+                .build();
+        em.persist(locker);
+
+        Member member = Member.builder()
+                .id("dlehddud60")
+                .pw("ehd12")
+                .team(team)
+                .locker(locker)
+                .build();
         em.persist(member);
-        Member member1 = em.find(Member.class, 1);
-        member1.getTeam().getMembers().stream()
-                        .forEach(log::info);
-        log.info("==========team2==========={}",team);
-        log.info("===========member=============={}",member);
-        log.info("============save end================");
-
     }
 
     @Override
-    public Member findByMemberId(Long memberId) {
+    public FindResponseMemberModel findByMemberId(Long memberId) {
 
-        Member member = em.find(Member.class, memberId);
-        log.info("============findByMemberId============={}",member);
+        Member member = memberRepository.findById(memberId).get();
 
-        Team findTeam = member.getTeam();
-        log.info("==========findTeam=========={}",findTeam);
+        FindResponseTeamModel teamModel = new FindResponseTeamModel(member.getTeam().getTeamId(),member.getTeam().getName());
 
-        return member;
+        FindResponseLockerModel lockerModel = new FindResponseLockerModel(member.getLocker().getLockerId(),member.getLocker().getName());
+
+        FindResponseMemberModel memberModel = new FindResponseMemberModel(member.getMemberId(),member.getId(),member.getPw(),teamModel,lockerModel);
+        log.info("========memberModel======={}",memberModel);
+
+
+        return memberModel;
     }
 
     @Override
