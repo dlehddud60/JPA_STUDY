@@ -1,8 +1,12 @@
 package com.example.youngJPA.team.service.impl;
 
+import com.example.youngJPA.member.entity.Member;
+import com.example.youngJPA.member.model.FindResponseMemberWithTeamListModel;
+import com.example.youngJPA.member.model.FindResponseMemberWithTeamModel;
 import com.example.youngJPA.team.domain.Team;
 import com.example.youngJPA.team.model.FindResponseTeamListModel;
 import com.example.youngJPA.team.model.FindResponseTeamModel;
+import com.example.youngJPA.team.model.FindResponseTeamWithMemberModel;
 import com.example.youngJPA.team.repository.TeamRepository;
 import com.example.youngJPA.team.service.TeamService;
 import jakarta.persistence.EntityManager;
@@ -33,7 +37,12 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public FindResponseTeamModel findByTeamId(Long teamId) {
         Team team = em.find(Team.class, teamId);
-        FindResponseTeamModel findResponseTeamModel = new FindResponseTeamModel(teamId,team.getName());
+        List<Member> members = team.getMembers();
+        List<FindResponseMemberWithTeamModel> findResponseMemberWithTeamModels = new ArrayList<>();
+        for (Member member : members) {
+            findResponseMemberWithTeamModels.add(new FindResponseMemberWithTeamModel(member.getMemberId(),member.getId(),member.getPw()));
+        }
+        FindResponseTeamModel findResponseTeamModel = new FindResponseTeamModel(teamId,team.getName(),findResponseMemberWithTeamModels);
         return findResponseTeamModel;
     }
 
@@ -42,7 +51,13 @@ public class TeamServiceImpl implements TeamService {
         List<Team> list = teamRepository.findAll();
         List<FindResponseTeamListModel> findResponseTeamModel = new ArrayList<>();
         for (Team team : list) {
-            findResponseTeamModel.add(new FindResponseTeamListModel(team.getTeamId(),team.getName()));
+            List<Member> members = team.getMembers();
+            List<FindResponseMemberWithTeamListModel> findResponseMemberWithTeamListModels = new ArrayList<>();
+            for (Member member : members) {
+                findResponseMemberWithTeamListModels.add(new FindResponseMemberWithTeamListModel(member.getMemberId(),member.getId(),member.getPw()));
+            }
+
+            findResponseTeamModel.add(new FindResponseTeamListModel(team.getTeamId(),team.getName(),findResponseMemberWithTeamListModels));
         }
         return findResponseTeamModel;
     }

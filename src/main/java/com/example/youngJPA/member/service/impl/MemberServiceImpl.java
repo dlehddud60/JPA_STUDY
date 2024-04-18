@@ -3,12 +3,17 @@ package com.example.youngJPA.member.service.impl;
 //import com.example.youngJPA.locker.domain.Locker;
 import com.example.youngJPA.locker.domain.Locker;
 import com.example.youngJPA.locker.model.FindResponseLockerModel;
+import com.example.youngJPA.locker.model.FindResponseLockerWithMemberListModel;
+import com.example.youngJPA.locker.model.FindResponseLockerWithMemberModel;
 import com.example.youngJPA.member.entity.Member;
+import com.example.youngJPA.member.model.FindResponseMemberListModel;
 import com.example.youngJPA.member.model.FindResponseMemberModel;
 import com.example.youngJPA.team.domain.Team;
 import com.example.youngJPA.member.repository.MemberRepository;
 import com.example.youngJPA.member.service.MemberService;
 import com.example.youngJPA.team.model.FindResponseTeamModel;
+import com.example.youngJPA.team.model.FindResponseTeamWithMemberListModel;
+import com.example.youngJPA.team.model.FindResponseTeamWithMemberModel;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -51,9 +56,11 @@ public class MemberServiceImpl implements MemberService {
 
         Member member = memberRepository.findById(memberId).get();
 
-        FindResponseTeamModel teamModel = new FindResponseTeamModel(member.getTeam().getTeamId(),member.getTeam().getName());
 
-        FindResponseLockerModel lockerModel = new FindResponseLockerModel(member.getLocker().getLockerId(),member.getLocker().getName());
+
+        FindResponseTeamWithMemberModel teamModel = new FindResponseTeamWithMemberModel(member.getTeam().getTeamId(),member.getTeam().getName());
+
+        FindResponseLockerWithMemberModel lockerModel = new FindResponseLockerWithMemberModel(member.getLocker().getLockerId(),member.getLocker().getName());
 
         FindResponseMemberModel memberModel = new FindResponseMemberModel(member.getMemberId(),member.getId(),member.getPw(),teamModel,lockerModel);
         log.info("========memberModel======={}",memberModel);
@@ -63,8 +70,17 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public List<Member> findAll() {
-        return memberRepository.findAll();
+    public  List<FindResponseMemberListModel> findAll() {
+        List<Member> list = memberRepository.findAll();
+        List<FindResponseMemberListModel> findResponseMemberListModels = new ArrayList<>();
+        for (Member member : list) {
+            Team team = member.getTeam();
+            Locker locker = member.getLocker();
+            FindResponseTeamWithMemberListModel findResponseLockerWithTeamListModel = new FindResponseTeamWithMemberListModel(team.getTeamId(),team.getName());
+            FindResponseLockerWithMemberListModel findResponseLockerWithMemberListModel = new FindResponseLockerWithMemberListModel(locker.getLockerId(),locker.getName());
+            findResponseMemberListModels.add(new FindResponseMemberListModel(member.getMemberId(),member.getId(),member.getPw(),findResponseLockerWithTeamListModel,findResponseLockerWithMemberListModel));
+        }
+        return findResponseMemberListModels;
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.example.youngJPA.member.controller;
 
 import com.example.youngJPA.member.entity.Auth;
 import com.example.youngJPA.member.entity.Member;
+import com.example.youngJPA.member.model.FindResponseMemberListModel;
 import com.example.youngJPA.member.model.FindResponseMemberModel;
 import com.example.youngJPA.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +33,7 @@ public class MemberController {
    }
 
    @GetMapping
-    public List<Member> findAll () {
+    public  List<FindResponseMemberListModel> findAll () {
         return memberService.findAll();
    }
    @GetMapping("/delete/{memberId}")

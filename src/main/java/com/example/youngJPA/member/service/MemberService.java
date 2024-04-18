@@ -1,6 +1,7 @@
 package com.example.youngJPA.member.service;
 
 import com.example.youngJPA.member.entity.Member;
+import com.example.youngJPA.member.model.FindResponseMemberListModel;
 import com.example.youngJPA.member.model.FindResponseMemberModel;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public interface MemberService {
 
     FindResponseMemberModel findByMemberId(Long memberId);
 
-    List<Member> findAll();
+    List<FindResponseMemberListModel> findAll();
 
     void delete(Long memberId);
 }
