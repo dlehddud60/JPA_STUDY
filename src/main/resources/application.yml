@@ -1,7 +1,8 @@
 
 spring:
   datasource:
-    url: jdbc:oracle:thin:@jakedb37_high?TNS_ADMIN=C:/opt/oralceCloud/JAKEDB
+#    url: jdbc:oracle:thin:@jakedb37_high?TNS_ADMIN=C:/opt/oralceCloud/JAKEDB
+    url: jdbc:oracle:thin:@jakedb37_high?TNS_ADMIN=/users/heeweon/Dev/dongyoung/OracleCloudWallet/JAKEDB
     username: JPASTUDY
     password: Oracle12345678
     driver-class-name: oracle.jdbc.driver.OracleDriver
