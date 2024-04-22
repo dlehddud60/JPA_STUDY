@@ -1,8 +1,8 @@
 package com.example.youngJPA.member.entity;
 
 //import com.example.youngJPA.locker.domain.Locker;
-import com.example.youngJPA.locker.domain.Locker;
-import com.example.youngJPA.team.domain.Team;
+import com.example.youngJPA.locker.entity.Locker;
+import com.example.youngJPA.team.entity.Team;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -4,6 +4,7 @@ import com.example.youngJPA.member.entity.Auth;
 import com.example.youngJPA.member.entity.Member;
 import com.example.youngJPA.member.model.FindResponseMemberListModel;
 import com.example.youngJPA.member.model.FindResponseMemberModel;
+import com.example.youngJPA.member.model.FindResponseQMemberModel;
 import com.example.youngJPA.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -39,5 +40,14 @@ public class MemberController {
    @GetMapping("/delete/{memberId}")
     public void delete(@PathVariable(name = "memberId") Long memberId) {
         memberService.delete(memberId);
+   }
+
+   @GetMapping("/count")
+    public Long count() {
+        return memberService.count();
+   }
+   @GetMapping("/findQ/{memberId}")
+    public FindResponseQMemberModel findQ(@PathVariable(name = "memberId") Long memberId) {
+        return memberService.findQ(memberId);
    }
 }

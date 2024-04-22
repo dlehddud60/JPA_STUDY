@@ -1,17 +1,17 @@
 package com.example.youngJPA.member.service.impl;
 
 //import com.example.youngJPA.locker.domain.Locker;
-import com.example.youngJPA.locker.domain.Locker;
-import com.example.youngJPA.locker.model.FindResponseLockerModel;
+import com.example.youngJPA.locker.entity.Locker;
 import com.example.youngJPA.locker.model.FindResponseLockerWithMemberListModel;
 import com.example.youngJPA.locker.model.FindResponseLockerWithMemberModel;
 import com.example.youngJPA.member.entity.Member;
 import com.example.youngJPA.member.model.FindResponseMemberListModel;
 import com.example.youngJPA.member.model.FindResponseMemberModel;
-import com.example.youngJPA.team.domain.Team;
+import com.example.youngJPA.member.model.FindResponseQMemberModel;
+import com.example.youngJPA.member.repository.MemberQueryRepository;
+import com.example.youngJPA.team.entity.Team;
 import com.example.youngJPA.member.repository.MemberRepository;
 import com.example.youngJPA.member.service.MemberService;
-import com.example.youngJPA.team.model.FindResponseTeamModel;
 import com.example.youngJPA.team.model.FindResponseTeamWithMemberListModel;
 import com.example.youngJPA.team.model.FindResponseTeamWithMemberModel;
 import jakarta.persistence.EntityManager;
@@ -29,6 +29,7 @@ import java.util.List;
 @Transactional
 public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
+    private final MemberQueryRepository memberQueryRepository;
     private final EntityManager em;
     @Override
     public void save() {
@@ -72,8 +73,12 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public  List<FindResponseMemberListModel> findAll() {
         List<Member> list = memberRepository.findAll();
+        List<Member> list1 = memberQueryRepository.findAll();
+        for (Member member : list1) {
+            log.info("===========member=============={}",member);
+        }
         List<FindResponseMemberListModel> findResponseMemberListModels = new ArrayList<>();
-        for (Member member : list) {
+        for (Member member : list1) {
             Team team = member.getTeam();
             Locker locker = member.getLocker();
             FindResponseTeamWithMemberListModel findResponseLockerWithTeamListModel = new FindResponseTeamWithMemberListModel(team.getTeamId(),team.getName());
@@ -86,5 +91,18 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void delete(Long memberId) {
         memberRepository.deleteById(memberId);
+    }
+
+    @Override
+    public Long count() {
+        return memberQueryRepository.count();
+    }
+
+    @Override
+    public FindResponseQMemberModel findQ(Long memberId) {
+        Member one = memberQueryRepository.findOne(memberId);
+        FindResponseQMemberModel findResponseQMemberModel = new FindResponseQMemberModel(one.getMemberId(),one.getId(),one.getPw());
+
+        return findResponseQMemberModel;
     }
 }

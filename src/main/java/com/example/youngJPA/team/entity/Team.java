@@ -1,7 +1,6 @@
-package com.example.youngJPA.team.domain;
+package com.example.youngJPA.team.entity;
 
 import com.example.youngJPA.member.entity.Member;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 

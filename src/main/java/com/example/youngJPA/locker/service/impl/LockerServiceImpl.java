@@ -1,6 +1,6 @@
 package com.example.youngJPA.locker.service.impl;
 
-import com.example.youngJPA.locker.domain.Locker;
+import com.example.youngJPA.locker.entity.Locker;
 import com.example.youngJPA.locker.model.FindResponseLockerListModel;
 import com.example.youngJPA.locker.model.FindResponseLockerModel;
 import com.example.youngJPA.locker.repository.LockerRepository;

@@ -1,4 +1,4 @@
-package com.example.youngJPA.locker.domain;
+package com.example.youngJPA.locker.entity;
 
 import com.example.youngJPA.member.entity.Member;
 import jakarta.persistence.*;
