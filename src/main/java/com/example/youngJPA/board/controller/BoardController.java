@@ -21,11 +21,11 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/list")
-    public void list(Model model, @ModelAttribute(name = "searchValue") SearchCondition searchCondition, @PageableDefault(page = 0,size = 10) Pageable pageable) {
+    public void list(Model model, @ModelAttribute(name = "searchValue") SearchCondition searchCondition, @PageableDefault(page = 0, size = 10) Pageable pageable) {
 
-        model.addAttribute("list", boardService.findAllByQueryDsl(searchCondition,pageable));
-        model.addAttribute("maxPage",10);
-        model.addAttribute("searchValue",searchCondition.searchValue());
+        model.addAttribute("list", boardService.findAllByQueryDsl(searchCondition, pageable));
+        model.addAttribute("maxPage", 10);
+        model.addAttribute("searchValue", searchCondition.searchValue());
     }
 
     @GetMapping("/find/{boardId}")

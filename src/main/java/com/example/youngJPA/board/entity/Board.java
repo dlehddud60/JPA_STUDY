@@ -20,10 +20,10 @@ public class Board {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardId;
 
-    @Column(name = "BOARD_TITLE" , nullable = false)
+    @Column(name = "BOARD_TITLE", nullable = false)
     private String boardTitle;
 
-    @Column(name = "BOARD_TEXT"  , nullable = false, length = 4000)
+    @Column(name = "BOARD_TEXT", nullable = false, length = 4000)
     private String boardText;
 
     @Column(name = "BOARD_INPUT_DT", updatable = false)

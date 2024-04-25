@@ -20,7 +20,7 @@ import static com.example.youngJPA.board.entity.QBoard.board;
 
 @Repository
 @RequiredArgsConstructor
-public class BoardQueryRepositoryImpl implements BoardQueryRepository{
+public class BoardQueryRepositoryImpl implements BoardQueryRepository {
     private final JPAQueryFactory queryFactory;
 
     @Override
@@ -39,11 +39,12 @@ public class BoardQueryRepositoryImpl implements BoardQueryRepository{
                     board.getBoardText(),
                     board.getBoardInputDt(),
                     board.getBoardUpdateDt()
-                    ));
+            ));
         }
         JPAQuery<Long> count = queryFactory.select(Wildcard.count).from(board);
-        return PageableExecutionUtils.getPage(pageList,pageable,count::fetchOne);
+        return PageableExecutionUtils.getPage(pageList, pageable, count::fetchOne);
     }
+
     private BooleanExpression search(String searchVelue) {
         return searchVelue != null ? board.boardTitle.contains(searchVelue) : null;
     }

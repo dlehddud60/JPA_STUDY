@@ -44,7 +44,7 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public Page<FindResponseBoardListModel> findAllByQueryDsl(SearchCondition searchCondition, Pageable pageable) {
 
-        return boardQueryRepository.findAllByQueryDsl(searchCondition,pageable);
+        return boardQueryRepository.findAllByQueryDsl(searchCondition, pageable);
     }
 
     @Override
